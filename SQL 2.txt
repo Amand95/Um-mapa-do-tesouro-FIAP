@@ -1,0 +1,20 @@
+-- Inserção de Culturas
+INSERT INTO Cultura VALUES (1, 'Milho', 'Argiloso');
+INSERT INTO Cultura VALUES (2, 'Soja', 'Arenoso');
+
+-- Inserção de Sensores
+INSERT INTO Sensor VALUES (1, 'Umidade', '%');
+INSERT INTO Sensor VALUES (2, 'pH', 'pH');
+INSERT INTO Sensor VALUES (3, 'Nutrientes', 'mg/kg');
+
+-- Inserção de LocalSensor
+INSERT INTO LocalSensor VALUES (1, 1, 1, -23.55, -46.63);
+INSERT INTO LocalSensor VALUES (2, 2, 1, -23.56, -46.62);
+
+-- Inserção de LeituraSensor
+INSERT INTO LeituraSensor VALUES (1, 1, TO_DATE('2025-04-10 08:00', 'YYYY-MM-DD HH24:MI'), 55.3);
+INSERT INTO LeituraSensor VALUES (2, 2, TO_DATE('2025-04-10 08:00', 'YYYY-MM-DD HH24:MI'), 6.8);
+
+-- Inserção de Aplicacao
+INSERT INTO Aplicacao VALUES (1, 1, 'Água', TO_DATE('2025-04-10 09:00', 'YYYY-MM-DD HH24:MI'), 30.5);
+INSERT INTO Aplicacao VALUES (2, 2, 'Vitamina', TO_DATE('2025-04-10 10:00', 'YYYY-MM-DD HH24:MI'), 15.2);
