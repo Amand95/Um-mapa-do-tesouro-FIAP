@@ -27,7 +27,29 @@ A modelagem segue os princípios de relacionamento de bancos de dados, incluindo
 - **Oracle**: Sistema de banco de dados utilizado para gerenciar a modelagem e dados de sensores.
 
 ## 🚀 **Como Rodar o Projeto**
-Este repositório contém apenas a **modelagem de banco de dados**. Não há código executável, pois o foco está na criação e documentação da estrutura do banco de dados para o sistema de sensores agrícolas. Para visualizar a modelagem, basta consultar os diagramas no repositório.
+Este repositório contém a modelagem de banco de dados para o sistema de sensores agrícolas. O foco principal está na criação e documentação da estrutura do banco de dados, incluindo os diagramas MER e DER.
+
+No entanto, se você desejar interagir com o banco de dados ou executar consultas, será necessário importar o modelo de banco de dados (arquivo .dmd do SQL Developer Data Modeler) para uma ferramenta como o SQL Developer ou Oracle para poder criar o banco de dados fisicamente e executar as operações desejadas.
+
+Baixe o arquivo de modelagem: Acesse o repositório para obter o arquivo de modelagem do banco de dados, com o diagrama MER e DER.
+
+Ferramentas Necessárias:
+
+SQL Developer: Para visualizar a modelagem ou gerar o script SQL.
+
+Oracle (se aplicável) ou qualquer outro banco de dados compatível, para criar o banco de dados real.
+
+Importação da Modelagem:
+
+Importe o arquivo .dmd no SQL Developer ou outra ferramenta de modelagem compatível para visualizar e modificar o modelo.
+
+Criação do Banco de Dados:
+
+Caso você queira criar o banco de dados real, utilize o SQL gerado pelo SQL Developer ou Oracle para criar as tabelas no seu banco de dados.
+
+Consultas e Testes:
+
+Após a criação do banco, você pode rodar consultas SQL para testar o funcionamento e verificar a integridade dos dados.
 
 ## 📊 **Diagrama Entidade-Relacionamento (DER)**
 O diagrama a seguir ilustra a modelagem do banco de dados para o sistema de sensores agrícolas, incluindo as entidades e seus relacionamentos.
