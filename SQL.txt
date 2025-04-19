@@ -1,0 +1,34 @@
+CREATE TABLE Cultura (
+  id_cultura INTEGER PRIMARY KEY,
+  nome VARCHAR2(50),
+  tipo_solo VARCHAR2(50)
+);
+
+CREATE TABLE Sensor (
+  id_sensor INTEGER PRIMARY KEY,
+  tipo VARCHAR2(30),
+  unidade_medida VARCHAR2(20)
+);
+
+CREATE TABLE LocalSensor (
+  id_local_sensor INTEGER PRIMARY KEY,
+  id_sensor INTEGER REFERENCES Sensor(id_sensor),
+  id_cultura INTEGER REFERENCES Cultura(id_cultura),
+  latitude NUMBER,
+  longitude NUMBER
+);
+
+CREATE TABLE LeituraSensor (
+  id_leitura INTEGER PRIMARY KEY,
+  id_local_sensor INTEGER REFERENCES LocalSensor(id_local_sensor),
+  data_hora DATE,
+  valor NUMBER
+);
+
+CREATE TABLE Aplicacao (
+  id_aplicacao INTEGER PRIMARY KEY,
+  id_cultura INTEGER REFERENCES Cultura(id_cultura),
+  tipo VARCHAR2(30),
+  data_hora DATE,
+  quantidade NUMBER
+);
