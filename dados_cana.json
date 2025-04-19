@@ -1,0 +1,78 @@
+[
+    {
+        "metodo": "manual",
+        "area_ha": 100,
+        "producao_t_ha": 95,
+        "perda_percentual": 5
+    },
+    {
+        "metodo": "mecanica",
+        "area_ha": 100,
+        "producao_t_ha": 85,
+        "perda_percentual": 15
+    },
+    {
+        "metodo": "manual",
+        "area_ha": 150,
+        "producao_t_ha": 142.5,
+        "perda_percentual": 5
+    },
+    {
+        "metodo": "mecanica",
+        "area_ha": 150,
+        "producao_t_ha": 127.5,
+        "perda_percentual": 15
+    },
+    {
+        "metodo": "manual",
+        "area_ha": 200,
+        "producao_t_ha": 190,
+        "perda_percentual": 5
+    },
+    {
+        "metodo": "mecanica",
+        "area_ha": 200,
+        "producao_t_ha": 170,
+        "perda_percentual": 15
+    }
+]-- Tabela Sensor
+CREATE TABLE Sensor (
+    ID_Sensor INT PRIMARY KEY,
+    Tipo_Sensor VARCHAR(50) NOT NULL
+);
+
+-- Tabela LeituraSensor
+CREATE TABLE LeituraSensor (
+    ID_Leitura INT PRIMARY KEY,
+    ID_Sensor INT,
+    Data_Hora DATETIME,
+    Valor_Leitura DOUBLE,
+    FOREIGN KEY (ID_Sensor) REFERENCES Sensor(ID_Sensor)
+);
+
+-- Tabela AjusteIrrigacao
+CREATE TABLE AjusteIrrigacao (
+    ID_Ajuste INT PRIMARY KEY,
+    Data_Hora DATETIME,
+    Quantidade_Agua DOUBLE,
+    Quantidade_Nutrientes DOUBLE,
+    ID_Leitura_pH INT,
+    ID_Leitura_Umidade INT,
+    FOREIGN KEY (ID_Leitura_pH) REFERENCES LeituraSensor(ID_Leitura),
+    FOREIGN KEY (ID_Leitura_Umidade) REFERENCES LeituraSensor(ID_Leitura)
+);
+
+-- Tabela Cultura
+CREATE TABLE Cultura (
+    ID_Cultura INT PRIMARY KEY,
+    Nome_Cultura VARCHAR(100),
+    Tipo_Solo VARCHAR(50)
+);
+
+-- Tabela Plantacao
+CREATE TABLE Plantacao (
+    ID_Plantacao INT PRIMARY KEY,
+    ID_Cultura INT,
+    Data_Plantio DATETIME,
+    FOREIGN KEY (ID_Cultura) REFERENCES Cultura(ID_Cultura)
+);
