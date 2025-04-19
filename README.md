@@ -1,4 +1,4 @@
-# 🌱 Um Mapa do Tesouro - FIAP
+# 🌱 Modelagem de Banco de Dados para Sistema de Sensores Agrícolas
 
 Este repositório faz parte do projeto desenvolvido na disciplina de **Gestão do Agronegócio** da FIAP. O objetivo é analisar e comparar a eficiência entre os métodos **manual** e **mecânico** de colheita da **cana-de-açúcar**, com foco na **produtividade** e **redução de perdas**.
 
