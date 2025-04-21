@@ -1,88 +1,100 @@
-# 🌾 Sistema de Monitoramento Inteligente de Plantação - FarmTech Solutions
+# 🌾 FarmTech Solutions – Sensoriamento para Irrigação e Nutrientes 🌱
 
-## 📘 Descrição
+## 🧠 Sobre o Projeto
+Este repositório contém a modelagem de banco de dados relacional desenvolvida para a disciplina de Banco de Dados da FIAP (Capítulos 10 ao 12), focada no uso de sensores em plantações para otimizar a irrigação e aplicação de nutrientes.
 
-Este projeto foi desenvolvido como parte da disciplina de Banco de Dados da FIAP (Capítulos 10 a 12). Ele simula um sistema de sensores aplicados em plantações para monitoramento e aplicação inteligente de água e nutrientes, com foco em aumentar a produtividade agrícola e reduzir desperdícios.
-
----
-
-## 🎯 Objetivo
-
-Criar um modelo de banco de dados relacional utilizando o **SQL Developer Data Modeler**, seguindo as regras de relacionamento **1:N** e **N:N**, que permita armazenar e analisar dados coletados por sensores de:
-
-- Umidade
-- pH
-- Níveis de nutrientes (NPK)
+O sistema visa:
+- 📡 Armazenar dados dos sensores de umidade, pH e nutrientes.
+- 💧 Monitorar e ajustar automaticamente a irrigação e fertilização.
+- 📊 Analisar variações ao longo do tempo para decisões mais inteligentes.
 
 ---
 
-## 📦 Entidades e Atributos (MER)
+## 🔍 Objetivos
+- Criar um modelo de banco de dados eficiente e relacional.
+- Otimizar o uso de recursos hídricos e nutricionais.
+- Permitir análises históricas das medições dos sensores.
 
-### 🔹 Sensor
-- `id_sensor` (PK, INT)
-- `tipo_sensor` (VARCHAR)
-- `localizacao` (VARCHAR)
-- `data_instalacao` (DATE)
+---
 
-### 🔹 Leitura
-- `id_leitura` (PK, INT)
-- `data_hora` (DATETIME)
-- `valor` (DOUBLE)
-- `id_sensor` (FK)
+## 📌 Requisitos do Sistema
+O sistema precisa responder a perguntas como:
+- 🗓️ **Qual foi a quantidade total de água aplicada em cada mês?**
+  - Dados necessários: Data, Hora e Quantidade de Água Aplicada.
+- 🌡️ **Como variou o pH do solo ao longo do ano?**
+  - Dados necessários: Data, Hora e Valor do pH.
+- 🧪 **Quais nutrientes foram aplicados e em que quantidade?**
+  - Dados necessários: Data, Hora e Quantidade de NPK aplicada.
 
-### 🔹 Aplicacao
-- `id_aplicacao` (PK, INT)
-- `data_hora` (DATETIME)
-- `tipo_produto` (VARCHAR)
-- `quantidade` (DOUBLE)
-- `id_sensor` (FK)
+---
 
-### 🔹 Cultura
-- `id_cultura` (PK, INT)
-- `nome_cultura` (VARCHAR)
-- `tipo` (VARCHAR)
-- `area_total` (DOUBLE)
+## 🧱 MER – Modelo Entidade Relacionamento
 
-### 🔹 Cultura_Sensor (entidade intermediária N:N)
-- `id_cultura_sensor` (PK, INT)
-- `id_cultura` (FK)
-- `id_sensor` (FK)
+### 🎯 Entidades e Atributos
+
+#### 🌽 Plantações
+- `id_plantacao` (PK) - Inteiro
+- `nome_cultura` - Texto
+- `localizacao` - Texto
+
+#### 📦 Sensores
+- `id_sensor` (PK) - Inteiro
+- `tipo_sensor` - Texto (`Umidade`, `pH`, `Nutrientes`)
+- `descricao` - Texto
+
+#### 📈 Leituras
+- `id_leitura` (PK) - Inteiro
+- `data_hora` - DateTime
+- `valor` - Double
+- `id_sensor` (FK) - Inteiro
+- `id_plantacao` (FK) - Inteiro
+
+#### 🚿 Aplicações de Água
+- `id_aplicacao` (PK) - Inteiro
+- `data_hora` - DateTime
+- `quantidade_litros` - Double
+- `id_plantacao` (FK) - Inteiro
+
+#### 🧴 Aplicações de Nutrientes
+- `id_nutriente` (PK) - Inteiro
+- `data_hora` - DateTime
+- `quantidade_nutriente` - Double
+- `tipo_nutriente` - Texto (`Fósforo`, `Potássio`, etc.)
+- `id_plantacao` (FK) - Inteiro
 
 ---
 
 ## 🔗 Relacionamentos
 
-- Um **sensor** pode gerar várias **leituras** (1:N)
-- Um **sensor** pode estar associado a várias **culturas**, e uma cultura a vários sensores (N:N)
-- Uma **aplicação** está relacionada a um sensor (1:N)
+- Uma **Plantação** 🌽 pode ter muitos **Sensores** 📦 (1:N)
+- Um **Sensor** 📦 pode gerar muitas **Leituras** 📈 (1:N)
+- Uma **Plantação** 🌽 pode ter muitas **Aplicações de Água** 🚿 (1:N)
+- Uma **Plantação** 🌽 pode ter muitas **Aplicações de Nutrientes** 🧴 (1:N)
 
 ---
 
-## 🛠️ Tecnologias e Ferramentas
+## 🧠 Tipo dos Dados (Cap. 12)
 
-- Oracle SQL Developer Data Modeler
-- Oracle Database
-- SQL
-- Git & GitHub
-
----
-
-## 🖼️ Modelo Relacional (DER)
-
-> Veja o DER exportado do SQL Developer: `docs/DER_agro.png`
-
----
-
-## 🧪 Scripts
-
-Os scripts SQL estão localizados na pasta `src/` e incluem:
-- Criação das tabelas (`criacao_tabelas.sql`)
-- Inserção de dados simulados (`insercao_dados.sql`)
+| Atributo              | Tipo de Dado  |
+|-----------------------|---------------|
+| `id_plantacao`        | INT           |
+| `nome_cultura`        | VARCHAR(100)  |
+| `localizacao`         | VARCHAR(100)  |
+| `id_sensor`           | INT           |
+| `tipo_sensor`         | VARCHAR(50)   |
+| `descricao`           | TEXT          |
+| `id_leitura`          | INT           |
+| `data_hora`           | DATETIME      |
+| `valor`               | DOUBLE        |
+| `quantidade_litros`   | DOUBLE        |
+| `quantidade_nutriente`| DOUBLE        |
+| `tipo_nutriente`      | VARCHAR(50)   |
 
 ---
 
+## 📦 Entrega
 
-## 📎 Entrega
-
-Este repositório faz parte da atividade avaliativa da FIAP. Nenhuma modificação será feita após a data de entrega conforme as diretrizes da disciplina.
-
+📁 O repositório contém:
+- ✅ Arquivo `.dmd` (modelo criado no SQL Developer Data Modeler)
+- ✅ Imagem `.png` do DER
+- ✅ Este arquivo `README.md` com a documentação completa do MER
