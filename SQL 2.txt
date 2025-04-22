@@ -1,34 +1,33 @@
 -- Tabela para Culturas
 CREATE TABLE Cultura (
-    Cultura_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Nome_Cultura VARCHAR(255) NOT NULL
+    id_cultura INTEGER PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
 );
 
 -- Tabela para Sensores
 CREATE TABLE Sensor (
-    Sensor_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Tipo_Sensor VARCHAR(50) NOT NULL, 
-    Unidade_Medida VARCHAR(50) NOT NULL
+    id_sensor INTEGER PRIMARY KEY,
+    tipo VARCHAR(50) NOT NULL, 
+    unidade_medida VARCHAR(50) NOT NULL
 );
 
--- Tabela para Medições
-CREATE TABLE Medicao (
-    Medicao_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Sensor_ID INT,
-    Cultura_ID INT,
-    Data_Hora TIMESTAMP NOT NULL,
-    Valor DECIMAL(10,2),
-    FOREIGN KEY (Sensor_ID) REFERENCES Sensor(Sensor_ID),
-    FOREIGN KEY (Cultura_ID) REFERENCES Cultura(Cultura_ID)
+-- Tabela para LeituraSensor
+CREATE TABLE LeituraSensor (
+    id_leitura INTEGER PRIMARY KEY,
+    id_sensor INTEGER,
+    id_cultura INTEGER,
+    data_hora TIMESTAMP NOT NULL,
+    valor_medido DECIMAL(10,2),
+    FOREIGN KEY (id_sensor) REFERENCES Sensor(id_sensor),
+    FOREIGN KEY (id_cultura) REFERENCES Cultura(id_cultura)
 );
 
--- Tabela para Ajustes
-CREATE TABLE Ajuste (
-    Ajuste_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Medicao_ID INT,
-    Quantidade_Agua DECIMAL(10,2),
-    Quantidade_Nutriente DECIMAL(10,2),
-    Data_Hora TIMESTAMP NOT NULL,
-    FOREIGN KEY (Medicao_ID) REFERENCES Medicao(Medicao_ID)
+-- Tabela para AplicacaoProduto
+CREATE TABLE AplicacaoProduto (
+    id_aplicacao INTEGER PRIMARY KEY,
+    id_cultura INTEGER,
+    data_hora TIMESTAMP NOT NULL,
+    tipo_produto VARCHAR(100),
+    quantidade DECIMAL(10,2),
+    FOREIGN KEY (id_cultura) REFERENCES Cultura(id_cultura)
 );
-
