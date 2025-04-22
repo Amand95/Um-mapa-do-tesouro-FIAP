@@ -1,0 +1,33 @@
+-- Tabela para armazenar informações das culturas
+CREATE TABLE Cultura (
+    Cultura_ID INT PRIMARY KEY,
+    Nome_Cultura VARCHAR2(100) NOT NULL
+);
+
+-- Tabela para armazenar os tipos de sensores
+CREATE TABLE Sensor (
+    Sensor_ID INT PRIMARY KEY,
+    Tipo_Sensor VARCHAR2(50) NOT NULL,
+    Unidade_Medida VARCHAR2(20)
+);
+
+-- Tabela para armazenar as medições realizadas
+CREATE TABLE Medicao (
+    Medicao_ID INT PRIMARY KEY,
+    Sensor_ID INT,
+    Cultura_ID INT,
+    Data_Hora TIMESTAMP NOT NULL,
+    Valor DECIMAL(10, 2),
+    CONSTRAINT fk_sensor FOREIGN KEY (Sensor_ID) REFERENCES Sensor(Sensor_ID),
+    CONSTRAINT fk_cultura FOREIGN KEY (Cultura_ID) REFERENCES Cultura(Cultura_ID)
+);
+
+-- Tabela para armazenar ajustes feitos com base nas medições
+CREATE TABLE Ajuste (
+    Ajuste_ID INT PRIMARY KEY,
+    Medicao_ID INT,
+    Quantidade_Agua DECIMAL(10, 2),
+    Quantidade_Nutriente DECIMAL(10, 2),
+    Data_Hora TIMESTAMP NOT NULL,
+    CONSTRAINT fk_medicao FOREIGN KEY (Medicao_ID) REFERENCES Medicao(Medicao_ID)
+);
