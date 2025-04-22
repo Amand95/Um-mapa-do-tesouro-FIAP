@@ -1,21 +1,11 @@
 CREATE TABLE Cultura (
     id_cultura INTEGER PRIMARY KEY,
-    nome VARCHAR(100),
-    tipo_solo VARCHAR(100)
+    nome VARCHAR(100)
 );
 
 CREATE TABLE Sensor (
     id_sensor INTEGER PRIMARY KEY,
-    tipo VARCHAR(100),
-    unidade VARCHAR(50)
-);
-
-CREATE TABLE LocalSensor (
-    id_local INTEGER PRIMARY KEY,
-    id_sensor INTEGER,
-    latitude DOUBLE,
-    longitude DOUBLE,
-    FOREIGN KEY (id_sensor) REFERENCES Sensor(id_sensor)
+    tipo VARCHAR(100)
 );
 
 CREATE TABLE LeituraSensor (
@@ -29,12 +19,7 @@ CREATE TABLE LeituraSensor (
 );
 
 CREATE TABLE AplicacaoProduto (
-    id_aplicacao INTEGER PRIMARY KEY,
-    id_cultura INTEGER,
-    tipo_produto VARCHAR(100),
-    data_hora DATETIME,
-    quantidade DOUBLE,
-    FOREIGN KEY (id_cultura) REFERENCES Cultura(id_cultura)
-);
+    id_ap_
+
 
 
