@@ -1,0 +1,6 @@
+| Atributo         | Tipo de dado sugerido |
+|------------------|------------------------|
+| id_*           | INTEGER                |
+| nome, tipo, tipo_produto | VARCHAR(100)       |
+| data_hora      | DATETIME               |
+| valor_medido, quantidade | DOUBLE              |
