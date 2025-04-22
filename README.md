@@ -1,100 +1,72 @@
-# 🌾 FarmTech Solutions – Sensoriamento para Irrigação e Nutrientes 🌱
+# 🌱 Sistema de Sensoriamento Agrícola  
+Trabalho desenvolvido para a disciplina de **Banco de Dados** – FIAP
 
-## 🧠 Sobre o Projeto
-Este repositório contém a modelagem de banco de dados relacional desenvolvida para a disciplina de Banco de Dados da FIAP (Capítulos 10 ao 12), focada no uso de sensores em plantações para otimizar a irrigação e aplicação de nutrientes.
+## 📌 Atividade 1: Entidades e Atributos
 
-O sistema visa:
-- 📡 Armazenar dados dos sensores de umidade, pH e nutrientes.
-- 💧 Monitorar e ajustar automaticamente a irrigação e fertilização.
-- 📊 Analisar variações ao longo do tempo para decisões mais inteligentes.
+### 🧾 Entidades
 
----
+#### 1. Cultura
+- `id_cultura` (PK) – Identificador único da cultura  
+- `nome` – Nome da cultura (ex: soja, café)
 
-## 🔍 Objetivos
-- Criar um modelo de banco de dados eficiente e relacional.
-- Otimizar o uso de recursos hídricos e nutricionais.
-- Permitir análises históricas das medições dos sensores.
+#### 2. Sensor
+- `id_sensor` (PK) – Identificador único do sensor  
+- `tipo` – Tipo do sensor (umidade, pH, NPK)
 
----
+#### 3. LeituraSensor
+- `id_leitura` (PK) – Identificador único da leitura  
+- `id_sensor` (FK) – Sensor responsável pela leitura  
+- `id_cultura` (FK) – Cultura relacionada à leitura  
+- `data_hora` – Data e hora da leitura  
+- `valor_medido` – Valor registrado pelo sensor
 
-## 📌 Requisitos do Sistema
-O sistema precisa responder a perguntas como:
-- 🗓️ **Qual foi a quantidade total de água aplicada em cada mês?**
-  - Dados necessários: Data, Hora e Quantidade de Água Aplicada.
-- 🌡️ **Como variou o pH do solo ao longo do ano?**
-  - Dados necessários: Data, Hora e Valor do pH.
-- 🧪 **Quais nutrientes foram aplicados e em que quantidade?**
-  - Dados necessários: Data, Hora e Quantidade de NPK aplicada.
-
----
-
-## 🧱 MER – Modelo Entidade Relacionamento
-
-### 🎯 Entidades e Atributos
-
-#### 🌽 Plantações
-- `id_plantacao` (PK) - Inteiro
-- `nome_cultura` - Texto
-- `localizacao` - Texto
-
-#### 📦 Sensores
-- `id_sensor` (PK) - Inteiro
-- `tipo_sensor` - Texto (`Umidade`, `pH`, `Nutrientes`)
-- `descricao` - Texto
-
-#### 📈 Leituras
-- `id_leitura` (PK) - Inteiro
-- `data_hora` - DateTime
-- `valor` - Double
-- `id_sensor` (FK) - Inteiro
-- `id_plantacao` (FK) - Inteiro
-
-#### 🚿 Aplicações de Água
-- `id_aplicacao` (PK) - Inteiro
-- `data_hora` - DateTime
-- `quantidade_litros` - Double
-- `id_plantacao` (FK) - Inteiro
-
-#### 🧴 Aplicações de Nutrientes
-- `id_nutriente` (PK) - Inteiro
-- `data_hora` - DateTime
-- `quantidade_nutriente` - Double
-- `tipo_nutriente` - Texto (`Fósforo`, `Potássio`, etc.)
-- `id_plantacao` (FK) - Inteiro
+#### 4. AplicacaoProduto
+- `id_aplicacao` (PK) – Identificador único da aplicação  
+- `id_cultura` (FK) – Cultura que recebeu a aplicação  
+- `data_hora` – Data e hora da aplicação  
+- `tipo_produto` – Tipo de produto aplicado (água, fertilizante, etc.)  
+- `quantidade` – Quantidade aplicada
 
 ---
 
 ## 🔗 Relacionamentos
 
-- Uma **Plantação** 🌽 pode ter muitos **Sensores** 📦 (1:N)
-- Um **Sensor** 📦 pode gerar muitas **Leituras** 📈 (1:N)
-- Uma **Plantação** 🌽 pode ter muitas **Aplicações de Água** 🚿 (1:N)
-- Uma **Plantação** 🌽 pode ter muitas **Aplicações de Nutrientes** 🧴 (1:N)
+- Uma **Cultura** pode ter várias **LeiturasSensor** (1:N)  
+- Um **Sensor** pode gerar várias **LeiturasSensor** (1:N)  
+- Uma **Cultura** pode receber várias **AplicacoesProduto** (1:N)
 
 ---
 
-## 🧠 Tipo dos Dados (Cap. 12)
+## 📊 Tipos de Dados Sugeridos
 
-| Atributo              | Tipo de Dado  |
-|-----------------------|---------------|
-| `id_plantacao`        | INT           |
-| `nome_cultura`        | VARCHAR(100)  |
-| `localizacao`         | VARCHAR(100)  |
-| `id_sensor`           | INT           |
-| `tipo_sensor`         | VARCHAR(50)   |
-| `descricao`           | TEXT          |
-| `id_leitura`          | INT           |
-| `data_hora`           | DATETIME      |
-| `valor`               | DOUBLE        |
-| `quantidade_litros`   | DOUBLE        |
-| `quantidade_nutriente`| DOUBLE        |
-| `tipo_nutriente`      | VARCHAR(50)   |
+| Atributo                         | Tipo de Dado       |
+|----------------------------------|--------------------|
+| `id_*`                           | INTEGER            |
+| `nome`, `tipo`, `tipo_produto`  | VARCHAR(100)       |
+| `data_hora`                      | DATETIME           |
+| `valor_medido`, `quantidade`     | DOUBLE             |
 
 ---
 
-## 📦 Entrega
+## ❗ Observações
 
-📁 O repositório contém:
-- ✅ Arquivo `.dmd` (modelo criado no SQL Developer Data Modeler)
-- ✅ Imagem `.png` do DER
-- ✅ Este arquivo `README.md` com a documentação completa do MER
+Devido a limitações técnicas, **não foi possível utilizar o Oracle SQL Developer Data Modeler** para gerar o arquivo `.dmd`.  
+A modelagem foi realizada manualmente com base nos requisitos do trabalho e nos conceitos abordados durante a disciplina.
+
+---
+
+## 📁 Estrutura do Projeto
+
+- `README.md` – Documentação do projeto  
+- `diagramas/` – (Opcional) Imagens dos diagramas MER e DER  
+- `scripts_sql/` – (Futuramente) Scripts SQL de criação e manipulação das tabelas  
+- `relatorios/` – (Opcional) Relatórios e arquivos auxiliares
+
+---
+
+## 💡 Objetivo do Sistema
+
+O sistema tem como objetivo gerenciar informações de sensores aplicados em plantações, permitindo o acompanhamento de leituras ambientais (como umidade, pH e nutrientes) e o controle das aplicações de insumos (água, fertilizantes, entre outros) por cultura agrícola.
+
+
+
