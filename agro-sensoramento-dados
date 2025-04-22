@@ -1,0 +1,28 @@
+-- Inserindo culturas
+INSERT INTO Cultura (Cultura_ID, Nome_Cultura) VALUES (1, 'Milho');
+INSERT INTO Cultura (Cultura_ID, Nome_Cultura) VALUES (2, 'Soja');
+
+-- Inserindo sensores
+INSERT INTO Sensor (Sensor_ID, Tipo_Sensor, Unidade_Medida) VALUES (1, 'Umidade', '%');
+INSERT INTO Sensor (Sensor_ID, Tipo_Sensor, Unidade_Medida) VALUES (2, 'pH', 'pH');
+INSERT INTO Sensor (Sensor_ID, Tipo_Sensor, Unidade_Medida) VALUES (3, 'Nutrientes', 'mg/kg');
+
+-- Inserindo medições
+INSERT INTO Medicao (Medicao_ID, Sensor_ID, Cultura_ID, Data_Hora, Valor)
+VALUES (1, 1, 1, TO_TIMESTAMP('2025-04-10 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 55.3);
+
+INSERT INTO Medicao (Medicao_ID, Sensor_ID, Cultura_ID, Data_Hora, Valor)
+VALUES (2, 2, 1, TO_TIMESTAMP('2025-04-10 08:15:00', 'YYYY-MM-DD HH24:MI:SS'), 6.8);
+
+INSERT INTO Medicao (Medicao_ID, Sensor_ID, Cultura_ID, Data_Hora, Valor)
+VALUES (3, 3, 2, TO_TIMESTAMP('2025-04-10 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 120.5);
+
+-- Inserindo ajustes
+INSERT INTO Ajuste (Ajuste_ID, Medicao_ID, Quantidade_Agua, Quantidade_Nutriente, Data_Hora)
+VALUES (1, 1, 30.5, NULL, TO_TIMESTAMP('2025-04-10 09:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO Ajuste (Ajuste_ID, Medicao_ID, Quantidade_Agua, Quantidade_Nutriente, Data_Hora)
+VALUES (2, 2, NULL, 15.2, TO_TIMESTAMP('2025-04-10 09:30:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO Ajuste (Ajuste_ID, Medicao_ID, Quantidade_Agua, Quantidade_Nutriente, Data_Hora)
+VALUES (3, 3, 25.0, 10.0, TO_TIMESTAMP('2025-04-10 10:00:00', 'YYYY-MM-DD HH24:MI:SS'));
