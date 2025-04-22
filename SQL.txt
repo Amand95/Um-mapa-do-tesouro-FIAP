@@ -1,25 +1,38 @@
--- Inserção de Culturas
-INSERT INTO Cultura (Cultura_ID, Nome, Tipo) VALUES (1, 'Milho', 'Argiloso');
-INSERT INTO Cultura (Cultura_ID, Nome, Tipo) VALUES (2, 'Soja', 'Arenoso');
+-- Inserção de culturas
+-- A tabela "Cultura" armazena informações sobre diferentes tipos de culturas agrícolas.
+-- Cada cultura é identificada por um ID único e possui um nome associado.
 
--- Inserção de Sensores
-INSERT INTO Sensor (Sensor_ID, Tipo, Unidade) VALUES (1, 'Umidade', '%');
-INSERT INTO Sensor (Sensor_ID, Tipo, Unidade) VALUES (2, 'pH', 'pH');
-INSERT INTO Sensor (Sensor_ID, Tipo, Unidade) VALUES (3, 'Nutrientes', 'mg/kg');
+INSERT INTO Cultura (Cultura_ID, Nome_Cultura) VALUES (1, 'Milho');
+INSERT INTO Cultura (Cultura_ID, Nome_Cultura) VALUES (2, 'Soja');
 
--- Inserção de LocalSensor
-INSERT INTO LocalSensor (ID, Sensor_ID, Cultura_ID, Latitude, Longitude) VALUES (1, 1, 1, -23.55, -46.63);
-INSERT INTO LocalSensor (ID, Sensor_ID, Cultura_ID, Latitude, Longitude) VALUES (2, 2, 1, -23.56, -46.62);
+-- Inserção de sensores
+-- A tabela "Sensor" armazena os tipos de sensores usados para monitoramento das culturas.
+-- Cada sensor tem um ID único, tipo e unidade de medida (ex: % para umidade, pH para pH do solo).
 
--- Inserção de LeituraSensor
-INSERT INTO LeituraSensor (Leitura_ID, Sensor_ID, Data_Hora, Valor) 
-VALUES (1, 1, STR_TO_DATE('2025-04-10 08:00', '%Y-%m-%d %H:%i'), 55.3);
-INSERT INTO LeituraSensor (Leitura_ID, Sensor_ID, Data_Hora, Valor) 
-VALUES (2, 2, STR_TO_DATE('2025-04-10 08:00', '%Y-%m-%d %H:%i'), 6.8);
+INSERT INTO Sensor (Sensor_ID, Tipo_Sensor, Unidade_Medida) VALUES (1, 'Umidade', '%');
+INSERT INTO Sensor (Sensor_ID, Tipo_Sensor, Unidade_Medida) VALUES (2, 'pH', 'pH');
+INSERT INTO Sensor (Sensor_ID, Tipo_Sensor, Unidade_Medida) VALUES (3, 'Nutrientes', 'mg/kg');
 
--- Inserção de Aplicacao
-INSERT INTO Aplicacao (Aplicacao_ID, Cultura_ID, Tipo, Data_Hora, Quantidade) 
-VALUES (1, 1, 'Água', STR_TO_DATE('2025-04-10 09:00', '%Y-%m-%d %H:%i'), 30.5);
-INSERT INTO Aplicacao (Aplicacao_ID, Cultura_ID, Tipo, Data_Hora, Quantidade) 
-VALUES (2, 2, 'Vitamina', STR_TO_DATE('2025-04-10 10:00', '%Y-%m-%d %H:%i'), 15.2);
+-- Inserção de medições
+-- A tabela "Medicao" registra as medições feitas pelos sensores em cada cultura, com data e valor.
+-- Medições são associadas a sensores e culturas específicas.
+
+INSERT INTO Medicao (Medicao_ID, Sensor_ID, Cultura_ID, Data_Hora, Valor)
+VALUES (1, 1, 1, TO_TIMESTAMP('2025-04-10 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 55.3);
+INSERT INTO Medicao (Medicao_ID, Sensor_ID, Cultura_ID, Data_Hora, Valor)
+VALUES (2, 2, 1, TO_TIMESTAMP('2025-04-10 08:15:00', 'YYYY-MM-DD HH24:MI:SS'), 6.8);
+INSERT INTO Medicao (Medicao_ID, Sensor_ID, Cultura_ID, Data_Hora, Valor)
+VALUES (3, 3, 2, TO_TIMESTAMP('2025-04-10 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 120.5);
+
+-- Inserção de ajustes
+-- A tabela "Ajuste" registra os ajustes feitos (quantidade de água ou nutrientes) com base nas medições.
+-- Cada ajuste está vinculado a uma medição específica e contém informações sobre a quantidade de água e nutrientes aplicados.
+
+INSERT INTO Ajuste (Ajuste_ID, Medicao_ID, Quantidade_Agua, Quantidade_Nutriente, Data_Hora)
+VALUES (1, 1, 30.5, NULL, TO_TIMESTAMP('2025-04-10 09:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO Ajuste (Ajuste_ID, Medicao_ID, Quantidade_Agua, Quantidade_Nutriente, Data_Hora)
+VALUES (2, 2, NULL, 15.2, TO_TIMESTAMP('2025-04-10 09:30:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO Ajuste (Ajuste_ID, Medicao_ID, Quantidade_Agua, Quantidade_Nutriente, Data_Hora)
+VALUES (3, 3, 25.0, 10.0, TO_TIMESTAMP('2025-04-10 10:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+
 
