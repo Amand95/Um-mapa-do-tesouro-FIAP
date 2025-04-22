@@ -1,0 +1,3 @@
+- Uma *Cultura* pode ter várias *LeiturasSensor* (1:N)
+- Um *Sensor* pode realizar várias *LeiturasSensor* (1:N)
+- Uma *Cultura* pode receber várias *AplicacoesProduto* (1:N)
