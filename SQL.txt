@@ -1,38 +1,40 @@
--- Inserção de culturas
--- A tabela "Cultura" armazena informações sobre diferentes tipos de culturas agrícolas.
--- Cada cultura é identificada por um ID único e possui um nome associado.
+CREATE TABLE Cultura (
+    id_cultura INTEGER PRIMARY KEY,
+    nome VARCHAR(100),
+    tipo_solo VARCHAR(100)
+);
 
-INSERT INTO Cultura (Cultura_ID, Nome_Cultura) VALUES (1, 'Milho');
-INSERT INTO Cultura (Cultura_ID, Nome_Cultura) VALUES (2, 'Soja');
+CREATE TABLE Sensor (
+    id_sensor INTEGER PRIMARY KEY,
+    tipo VARCHAR(100),
+    unidade VARCHAR(50)
+);
 
--- Inserção de sensores
--- A tabela "Sensor" armazena os tipos de sensores usados para monitoramento das culturas.
--- Cada sensor tem um ID único, tipo e unidade de medida (ex: % para umidade, pH para pH do solo).
+CREATE TABLE LocalSensor (
+    id_local INTEGER PRIMARY KEY,
+    id_sensor INTEGER,
+    latitude DOUBLE,
+    longitude DOUBLE,
+    FOREIGN KEY (id_sensor) REFERENCES Sensor(id_sensor)
+);
 
-INSERT INTO Sensor (Sensor_ID, Tipo_Sensor, Unidade_Medida) VALUES (1, 'Umidade', '%');
-INSERT INTO Sensor (Sensor_ID, Tipo_Sensor, Unidade_Medida) VALUES (2, 'pH', 'pH');
-INSERT INTO Sensor (Sensor_ID, Tipo_Sensor, Unidade_Medida) VALUES (3, 'Nutrientes', 'mg/kg');
+CREATE TABLE LeituraSensor (
+    id_leitura INTEGER PRIMARY KEY,
+    id_sensor INTEGER,
+    id_cultura INTEGER,
+    data_hora DATETIME,
+    valor_medido DOUBLE,
+    FOREIGN KEY (id_sensor) REFERENCES Sensor(id_sensor),
+    FOREIGN KEY (id_cultura) REFERENCES Cultura(id_cultura)
+);
 
--- Inserção de medições
--- A tabela "Medicao" registra as medições feitas pelos sensores em cada cultura, com data e valor.
--- Medições são associadas a sensores e culturas específicas.
-
-INSERT INTO Medicao (Medicao_ID, Sensor_ID, Cultura_ID, Data_Hora, Valor)
-VALUES (1, 1, 1, TO_TIMESTAMP('2025-04-10 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 55.3);
-INSERT INTO Medicao (Medicao_ID, Sensor_ID, Cultura_ID, Data_Hora, Valor)
-VALUES (2, 2, 1, TO_TIMESTAMP('2025-04-10 08:15:00', 'YYYY-MM-DD HH24:MI:SS'), 6.8);
-INSERT INTO Medicao (Medicao_ID, Sensor_ID, Cultura_ID, Data_Hora, Valor)
-VALUES (3, 3, 2, TO_TIMESTAMP('2025-04-10 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 120.5);
-
--- Inserção de ajustes
--- A tabela "Ajuste" registra os ajustes feitos (quantidade de água ou nutrientes) com base nas medições.
--- Cada ajuste está vinculado a uma medição específica e contém informações sobre a quantidade de água e nutrientes aplicados.
-
-INSERT INTO Ajuste (Ajuste_ID, Medicao_ID, Quantidade_Agua, Quantidade_Nutriente, Data_Hora)
-VALUES (1, 1, 30.5, NULL, TO_TIMESTAMP('2025-04-10 09:00:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO Ajuste (Ajuste_ID, Medicao_ID, Quantidade_Agua, Quantidade_Nutriente, Data_Hora)
-VALUES (2, 2, NULL, 15.2, TO_TIMESTAMP('2025-04-10 09:30:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO Ajuste (Ajuste_ID, Medicao_ID, Quantidade_Agua, Quantidade_Nutriente, Data_Hora)
-VALUES (3, 3, 25.0, 10.0, TO_TIMESTAMP('2025-04-10 10:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+CREATE TABLE AplicacaoProduto (
+    id_aplicacao INTEGER PRIMARY KEY,
+    id_cultura INTEGER,
+    tipo_produto VARCHAR(100),
+    data_hora DATETIME,
+    quantidade DOUBLE,
+    FOREIGN KEY (id_cultura) REFERENCES Cultura(id_cultura)
+);
 
 
