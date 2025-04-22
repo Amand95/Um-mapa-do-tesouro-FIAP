@@ -1,34 +1,25 @@
--- Tabela para Culturas
-CREATE TABLE Cultura (
-    Cultura_ID INT PRIMARY KEY,
-    Nome_Cultura VARCHAR(255) NOT NULL
-);
+-- Inserção de Culturas
+INSERT INTO Cultura (Cultura_ID, Nome, Tipo) VALUES (1, 'Milho', 'Argiloso');
+INSERT INTO Cultura (Cultura_ID, Nome, Tipo) VALUES (2, 'Soja', 'Arenoso');
 
--- Tabela para Sensores
-CREATE TABLE Sensor (
-    Sensor_ID INT PRIMARY KEY,
-    Tipo_Sensor VARCHAR(50) NOT NULL, 
-    Unidade_Medida VARCHAR(50) NOT NULL
-);
+-- Inserção de Sensores
+INSERT INTO Sensor (Sensor_ID, Tipo, Unidade) VALUES (1, 'Umidade', '%');
+INSERT INTO Sensor (Sensor_ID, Tipo, Unidade) VALUES (2, 'pH', 'pH');
+INSERT INTO Sensor (Sensor_ID, Tipo, Unidade) VALUES (3, 'Nutrientes', 'mg/kg');
 
--- Tabela para Medições
-CREATE TABLE Medicao (
-    Medicao_ID INT PRIMARY KEY,
-    Sensor_ID INT,
-    Cultura_ID INT,
-    Data_Hora TIMESTAMP NOT NULL,
-    Valor DECIMAL(10,2),
-    FOREIGN KEY (Sensor_ID) REFERENCES Sensor(Sensor_ID),
-    FOREIGN KEY (Cultura_ID) REFERENCES Cultura(Cultura_ID)
-);
+-- Inserção de LocalSensor
+INSERT INTO LocalSensor (ID, Sensor_ID, Cultura_ID, Latitude, Longitude) VALUES (1, 1, 1, -23.55, -46.63);
+INSERT INTO LocalSensor (ID, Sensor_ID, Cultura_ID, Latitude, Longitude) VALUES (2, 2, 1, -23.56, -46.62);
 
--- Tabela para Ajustes
-CREATE TABLE Ajuste (
-    Ajuste_ID INT PRIMARY KEY,
-    Medicao_ID INT,
-    Quantidade_Agua DECIMAL(10,2),
-    Quantidade_Nutriente DECIMAL(10,2),
-    Data_Hora TIMESTAMP NOT NULL,
-    FOREIGN KEY (Medicao_ID) REFERENCES Medicao(Medicao_ID)
-);
+-- Inserção de LeituraSensor
+INSERT INTO LeituraSensor (Leitura_ID, Sensor_ID, Data_Hora, Valor) 
+VALUES (1, 1, STR_TO_DATE('2025-04-10 08:00', '%Y-%m-%d %H:%i'), 55.3);
+INSERT INTO LeituraSensor (Leitura_ID, Sensor_ID, Data_Hora, Valor) 
+VALUES (2, 2, STR_TO_DATE('2025-04-10 08:00', '%Y-%m-%d %H:%i'), 6.8);
+
+-- Inserção de Aplicacao
+INSERT INTO Aplicacao (Aplicacao_ID, Cultura_ID, Tipo, Data_Hora, Quantidade) 
+VALUES (1, 1, 'Água', STR_TO_DATE('2025-04-10 09:00', '%Y-%m-%d %H:%i'), 30.5);
+INSERT INTO Aplicacao (Aplicacao_ID, Cultura_ID, Tipo, Data_Hora, Quantidade) 
+VALUES (2, 2, 'Vitamina', STR_TO_DATE('2025-04-10 10:00', '%Y-%m-%d %H:%i'), 15.2);
 
